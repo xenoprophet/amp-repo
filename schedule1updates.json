@@ -1,0 +1,40 @@
+[
+  {
+    "UpdateStageName": "Schedule I Download",
+    "UpdateSourcePlatform": "All",
+    "UpdateSource": "SteamCMD",
+    "UpdateSourceData": "3164500",
+    "UpdateSourceArgs": "3164500",
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "MelonLoader Download",
+    "UpdateSourcePlatform": "All",
+    "UpdateSource": "GithubRelease",
+    "UpdateSourceArgs": "LavaGang/MelonLoader",
+    "UpdateSourceData": "MelonLoader.x64.zip",
+    "UpdateSourceTarget": "{{$FullBaseDir}}",
+    "UnzipUpdateSource": true,
+    "OverwriteExistingFiles": true,
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "S1 DedicatedServerMod Download (IL2CPP)",
+    "UpdateSourcePlatform": "All",
+    "UpdateSource": "GithubRelease",
+    "UpdateSourceArgs": "ifBars/S1DedicatedServers",
+    "UpdateSourceData": "Il2cpp_Server.zip",
+    "UpdateSourceTarget": "{{$FullBaseDir}}",
+    "UnzipUpdateSource": true,
+    "OverwriteExistingFiles": true,
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Create steam_appid.txt",
+    "UpdateSourcePlatform": "Windows",
+    "UpdateSource": "Executable",
+    "UpdateSourceData": "powershell.exe",
+    "UpdateSourceArgs": "-NoProfile -Command \"Set-Content -Path '{{$FullBaseDir}}steam_appid.txt' -Value '3164500' -NoNewline\"",
+    "SkipOnFailure": true
+  }
+]

@@ -2,7 +2,7 @@
   {
     "DisplayName": "Server Name",
     "Description": "Name shown to players.",
-    "Category": "Server Settings:fa-server",
+    "Category": "Server Settings",
     "FieldName": "ServerName",
     "InputType": "text",
     "DefaultValue": "My Schedule I Server",
@@ -12,9 +12,11 @@
   {
     "DisplayName": "Max Players",
     "Description": "Maximum concurrent players.",
-    "Category": "Server Settings:fa-server",
+    "Category": "Server Settings",
     "FieldName": "MaxPlayers",
     "InputType": "number",
+    "minValue": "1",
+    "maxValue": "32",
     "DefaultValue": "8",
     "Required": true,
     "IncludeInCommandLine": false
@@ -22,7 +24,7 @@
   {
     "DisplayName": "Authentication Provider",
     "Description": "SteamGameServer is recommended for public servers.",
-    "Category": "Security:fa-lock",
+    "Category": "Security",
     "FieldName": "AuthProvider",
     "InputType": "enum",
     "EnumValues": {
@@ -35,7 +37,7 @@
   {
     "DisplayName": "Block Known Risky Client Mods",
     "Description": "Reject players using client mods the S1DS project flags as risky.",
-    "Category": "Security:fa-lock",
+    "Category": "Security",
     "FieldName": "BlockRiskyClientMods",
     "InputType": "enum",
     "EnumValues": {
@@ -48,11 +50,10 @@
   {
     "DisplayName": "Additional Arguments",
     "Description": "Extra command-line arguments appended to the launch command.",
-    "Category": "Advanced:fa-gear",
-    "FieldName": "FormattedArgs",
+    "Category": "Advanced",
+    "FieldName": "CustomArgs",
     "InputType": "text",
     "DefaultValue": "",
-    "IncludeInCommandLine": false,
-    "Advanced": true
+    "IncludeInCommandLine": false
   }
 ]

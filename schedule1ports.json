@@ -1,0 +1,16 @@
+[
+  {
+    "Protocol": "UDP",
+    "Port": 38465,
+    "Ref": "GamePort",
+    "Name": "Game Port",
+    "Description": "Gameplay traffic (serverPort in server_config.toml). Players connect here."
+  },
+  {
+    "Protocol": "UDP",
+    "Port": 27016,
+    "Ref": "QueryPort",
+    "Name": "Steam Query Port",
+    "Description": "Steam game server query port (steamGameServerQueryPort)."
+  }
+]
