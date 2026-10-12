@@ -1,10 +1,8 @@
 {
   "id": "f878cf0b-71a7-49fa-9003-e1cace2fe0a3",
-  "authors": [
-    "Personal"
-  ],
-  "origin": "https://github.com/local-s1ds/amp-templates.git",
-  "url": "https://github.com/local-s1ds/amp-templates",
+  "authors": ["Personal"],
+  "origin": "https://github.com/xenoprophet/amp-repo.git",
+  "url": "https://github.com/xenoprophet/amp-repo",
   "imagefile": "",
   "prefix": "S1",
   "repotype": "AppTemplates"
