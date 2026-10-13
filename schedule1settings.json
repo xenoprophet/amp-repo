@@ -1,0 +1,80 @@
+{
+  "server": {
+    "serverName": "My Schedule I Server",
+    "serverDescription": "A dedicated server for Schedule One",
+    "maxPlayers": 8,
+    "serverPort": 38465,
+    "serverPassword": ""
+  },
+  "publicListing": {
+    "publicListingEnabled": false,
+    "publicListingServiceUrl": "https://list.s1servers.com",
+    "publicListingId": "",
+    "publicListingSecret": ""
+  },
+  "authentication": {
+    "authProvider": "SteamGameServer",
+    "authTimeoutSeconds": 30,
+    "modVerificationEnabled": true,
+    "modVerificationTimeoutSeconds": 20,
+    "blockKnownRiskyClientMods": true,
+    "allowUnpairedClientMods": true,
+    "strictClientModMode": false,
+    "steamGameServerLogOnAnonymous": true,
+    "steamGameServerToken": "",
+    "steamGameServerQueryPort": 27016,
+    "steamGameServerMode": "Authentication",
+    "steamWebApiKey": "",
+    "steamWebApiIdentity": "DedicatedServerMod"
+  },
+  "messaging": {
+    "messagingBackend": "FishNetRpc",
+    "steamNetworkingSocketsVirtualPort": 0,
+    "steamNetworkingSocketsMaxPayloadBytes": 1200,
+    "steamNetworkingSocketsServerSteamId": ""
+  },
+  "tcpConsole": {
+    "tcpConsoleEnabled": false,
+    "tcpConsoleBindAddress": "127.0.0.1",
+    "tcpConsolePort": 4050,
+    "tcpConsoleMaxConnections": 3,
+    "tcpConsoleRequirePassword": false,
+    "tcpConsolePassword": "",
+    "stdioConsoleMode": "Enabled"
+  },
+  "webPanel": {
+    "webPanelEnabled": false,
+    "webPanelBindAddress": "127.0.0.1",
+    "webPanelPort": 4051,
+    "webPanelOpenBrowserOnStart": false,
+    "webPanelSessionMinutes": 120,
+    "webPanelExposeLogs": true
+  },
+  "gameplay": {
+    "ignoreGhostHostForSleep": true,
+    "timeProgressionMultiplier": 1.0,
+    "allowSleeping": true,
+    "pauseGameWhenEmpty": false,
+    "freshSaveQuestBootstrapMode": "StartFromBeginning"
+  },
+  "autosave": {
+    "autoSaveEnabled": true,
+    "autoSaveIntervalMinutes": 15.0,
+    "autoSaveOnPlayerJoin": true,
+    "autoSaveOnPlayerLeave": true
+  },
+  "logging": {
+    "enabledLoggingOptions": [
+      "logPlayerActions",
+      "logAdminCommands"
+    ],
+    "enablePerformanceMonitoring": false
+  },
+  "performance": {
+    "targetFrameRate": 60,
+    "vSyncCount": 0
+  },
+  "storage": {
+    "saveGamePath": ""
+  }
+}

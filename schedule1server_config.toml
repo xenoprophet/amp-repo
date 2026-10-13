@@ -1,0 +1,189 @@
+# DedicatedServerMod server configuration.
+# This file is grouped and commented for easier editing.
+# Command-line arguments still override these values at runtime.
+# Legacy server_config.json is imported automatically if this TOML file does not exist.
+
+
+# Core server identity and connection settings.
+[server]
+# Public server name shown in server browsers.
+serverName = 'Schedule One Dedicated Server'
+
+# Short description displayed to players.
+serverDescription = 'A dedicated server for Schedule One'
+
+# Maximum number of simultaneous players.
+maxPlayers = 16
+
+# Game server port to listen on.
+serverPort = 38465
+
+# Connection password. Leave empty to disable.
+serverPassword = ''
+
+# Optional public discovery. Direct IP connections do not depend on this service.
+[publicListing]
+# Publish this server while it is online. Disabled by default.
+publicListingEnabled = false
+
+# HTTPS endpoint for the public server directory.
+publicListingServiceUrl = 'https://list.s1servers.com'
+
+# Directory identity issued at https://s1servers.com/server-portal.
+publicListingId = ''
+
+# Directory secret issued by the server portal. Keep this credential private.
+publicListingSecret = ''
+
+# Dedicated server authentication and client mod verification.
+[authentication]
+# Authentication provider: 'SteamGameServer' for normal hosting, or 'None' for local development. Legacy 'SteamWebApi' values are migrated to 'SteamGameServer'.
+authProvider = 'SteamGameServer'
+
+# Authentication handshake timeout in seconds.
+authTimeoutSeconds = 30
+
+# Require the dedicated client mod verification handshake.
+modVerificationEnabled = true
+
+# Client mod verification timeout in seconds.
+modVerificationTimeoutSeconds = 20
+
+# Reject known risky client-only mods even when unpaired mods are allowed.
+blockKnownRiskyClientMods = true
+
+# Allow client-only mods that do not have a paired server mod.
+allowUnpairedClientMods = true
+
+# Require strict hash pinning for approved client mods.
+strictClientModMode = false
+
+# Use anonymous Steam game server login. Disable to use a server token.
+steamGameServerLogOnAnonymous = true
+
+# Steam game server login token used when anonymous login is disabled.
+steamGameServerToken = ''
+
+# Steam query/status port.
+steamGameServerQueryPort = 27016
+
+# Steam game server mode: 'NoAuthentication', 'Authentication', or 'AuthenticationAndSecure'.
+steamGameServerMode = 'Authentication'
+
+# Deprecated compatibility setting. SteamWebApi auth is no longer selectable.
+steamWebApiKey = ''
+
+# Deprecated compatibility setting. SteamWebApi auth is no longer selectable.
+steamWebApiIdentity = 'DedicatedServerMod'
+
+# Custom server-client messaging backend selection.
+[messaging]
+# Messaging backend: 'FishNetRpc' or 'SteamNetworkingSockets'. FishNetRpc is the default on both Mono and IL2CPP.
+messagingBackend = 'FishNetRpc'
+
+# Steam Networking Sockets virtual port used for peer routing.
+steamNetworkingSocketsVirtualPort = 0
+
+# Maximum Steam Networking Sockets payload size in bytes.
+steamNetworkingSocketsMaxPayloadBytes = 1200
+
+# Optional target server SteamID for client-side Steam Networking Sockets routing.
+steamNetworkingSocketsServerSteamId = ''
+
+# Remote and local host console controls.
+[tcpConsole]
+# Enable the TCP admin console.
+tcpConsoleEnabled = false
+
+# Bind address for the TCP console. Use '127.0.0.1' for local-only access.
+tcpConsoleBindAddress = '127.0.0.1'
+
+# TCP console port.
+tcpConsolePort = 4050
+
+# Maximum concurrent TCP console clients.
+tcpConsoleMaxConnections = 3
+
+# Require a password for the TCP console.
+tcpConsoleRequirePassword = false
+
+# TCP console password.
+tcpConsolePassword = ''
+
+# Host stdio console mode: 'Disabled', 'Auto', or 'Enabled'.
+stdioConsoleMode = 'Auto'
+
+# Integrated loopback-only browser panel for server owners.
+[webPanel]
+# Enable the integrated loopback-only web panel. Disabled by default for hosted or service-style deployments.
+webPanelEnabled = false
+
+# Loopback bind address for the web panel. Only localhost/127.0.0.1-style addresses are supported.
+webPanelBindAddress = '127.0.0.1'
+
+# HTTP port for the integrated web panel.
+webPanelPort = 4051
+
+# Attempt to open the web panel in the default browser on startup.
+webPanelOpenBrowserOnStart = true
+
+# Session lifetime in minutes for localhost browser access.
+webPanelSessionMinutes = 120
+
+# Expose recent runtime logs to the localhost web panel.
+webPanelExposeLogs = true
+
+# Gameplay and simulation behavior on dedicated servers.
+[gameplay]
+# Ignore the loopback ghost host when checking sleep readiness.
+ignoreGhostHostForSleep = true
+
+# Time progression multiplier. 1.0 is the default game speed.
+timeProgressionMultiplier = 1.0
+
+# Allow players to sleep to advance time.
+allowSleeping = true
+
+# Pause the game simulation when no players are connected.
+pauseGameWhenEmpty = false
+
+# Fresh-save quest bootstrap mode: 'StartFromBeginning' (recommended) or 'StartPostIntro'.
+freshSaveQuestBootstrapMode = 'StartFromBeginning'
+
+# Automatic save behavior.
+[autosave]
+# Enable timed auto-saving.
+autoSaveEnabled = true
+
+# Minutes between automatic saves.
+autoSaveIntervalMinutes = 15.0
+
+# Trigger a save when a player joins.
+autoSaveOnPlayerJoin = true
+
+# Trigger a save when a player leaves.
+autoSaveOnPlayerLeave = true
+
+# Diagnostic and debug logging controls.
+[logging]
+# Enable one or more logging streams.
+# Valid values: 'debugMode', 'verboseLogging', 'logPlayerActions', 'logAdminCommands',
+# 'logNetworkingDebug', 'logMessageRoutingDebug', 'logMessagingBackendDebug',
+# 'logStartupDebug', 'logServerNetworkDebug', 'logPlayerLifecycleDebug', 'logAuthenticationDebug'.
+enabledLoggingOptions = ['logPlayerActions', 'logAdminCommands']
+
+# Enable performance monitoring instrumentation.
+enablePerformanceMonitoring = false
+
+# Headless performance tuning.
+[performance]
+# Target frame rate. Use -1 for unlimited.
+targetFrameRate = 60
+
+# VSync count. Dedicated servers should usually keep this at 0.
+vSyncCount = 0
+
+# Save-file location settings.
+[storage]
+# Optional custom save path. Empty uses UserData/DedicatedServerSave.
+saveGamePath = ''

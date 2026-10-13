@@ -1,0 +1,10 @@
+[
+  {
+    "UpdateStageName": "Write Schedule I server configuration",
+    "UpdateSourcePlatform": "Windows",
+    "UpdateSource": "Executable",
+    "UpdateSourceData": "powershell.exe",
+    "UpdateSourceArgs": "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"{{$FullBaseDir}}AMP_WriteServerConfig.ps1\"",
+    "SkipOnFailure": false
+  }
+]

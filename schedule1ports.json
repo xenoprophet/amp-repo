@@ -1,16 +1,30 @@
 [
   {
-    "Protocol": "UDP",
+    "Protocol": "Both",
     "Port": 38465,
     "Ref": "GamePort",
     "Name": "Game Port",
-    "Description": "Gameplay traffic (serverPort in server_config.toml). Players connect here."
+    "Description": "UDP gameplay and TCP status queries; written to server.serverPort in server_config.toml."
   },
   {
     "Protocol": "UDP",
     "Port": 27016,
     "Ref": "QueryPort",
     "Name": "Steam Query Port",
-    "Description": "Steam game server query port (steamGameServerQueryPort)."
+    "Description": "Steam query/status UDP port; written to authentication.steamGameServerQueryPort."
+  },
+  {
+    "Protocol": "TCP",
+    "Port": 4050,
+    "Ref": "ConsolePort",
+    "Name": "TCP Console Port",
+    "Description": "Reserved for the optional TCP admin console. Disabled and loopback-only by default."
+  },
+  {
+    "Protocol": "TCP",
+    "Port": 4051,
+    "Ref": "WebPanelPort",
+    "Name": "Web Panel Port",
+    "Description": "Reserved for the optional local web panel. Disabled and loopback-only by default."
   }
 ]

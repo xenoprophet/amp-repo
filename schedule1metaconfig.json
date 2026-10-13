@@ -1,0 +1,8 @@
+[
+  {
+    "ConfigFile": "AMP_server_settings.json",
+    "AutoMap": true,
+    "Importable": true,
+    "ConfigType": "json"
+  }
+]

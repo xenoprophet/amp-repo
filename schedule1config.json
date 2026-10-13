@@ -1,55 +1,644 @@
 [
   {
     "DisplayName": "Server Name",
-    "Description": "Name shown to players.",
+    "Description": "Public server name shown in server browsers. Changes apply on the next server start.",
     "Category": "Server Settings",
     "FieldName": "ServerName",
+    "ParamFieldName": "server.serverName",
+    "IncludeInCommandLine": false,
     "InputType": "text",
     "DefaultValue": "My Schedule I Server",
-    "Required": true,
-    "IncludeInCommandLine": false
+    "Required": true
+  },
+  {
+    "DisplayName": "Server Description",
+    "Description": "Short description displayed to players. Changes apply on the next server start.",
+    "Category": "Server Settings",
+    "FieldName": "ServerDescription",
+    "ParamFieldName": "server.serverDescription",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": "A dedicated server for Schedule One"
   },
   {
     "DisplayName": "Max Players",
-    "Description": "Maximum concurrent players.",
+    "Description": "Maximum number of simultaneous players. Changes apply on the next server start.",
     "Category": "Server Settings",
     "FieldName": "MaxPlayers",
+    "ParamFieldName": "server.maxPlayers",
+    "IncludeInCommandLine": false,
     "InputType": "number",
+    "DefaultValue": "8",
     "minValue": "1",
     "maxValue": "32",
-    "DefaultValue": "8",
-    "Required": true,
-    "IncludeInCommandLine": false
+    "Required": true
+  },
+  {
+    "DisplayName": "Server Port",
+    "Description": "Game server port to listen on. Changes apply on the next server start.",
+    "Category": "Server Settings",
+    "FieldName": "$GamePort",
+    "ParamFieldName": "server.serverPort",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "Hidden": true,
+    "ExcludeFromImport": true
+  },
+  {
+    "DisplayName": "Server Password",
+    "Description": "Connection password. Leave empty to disable. Changes apply on the next server start.",
+    "Category": "Server Settings",
+    "FieldName": "ServerPassword",
+    "ParamFieldName": "server.serverPassword",
+    "IncludeInCommandLine": false,
+    "InputType": "password",
+    "DefaultValue": ""
+  },
+  {
+    "DisplayName": "Public Listing Enabled",
+    "Description": "Publish this server while it is online. Disabled by default. Changes apply on the next server start.",
+    "Category": "Public Listing",
+    "FieldName": "PublicListingEnabled",
+    "ParamFieldName": "publicListing.publicListingEnabled",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "false",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Public Listing Service URL",
+    "Description": "HTTPS endpoint for the public server directory. Changes apply on the next server start.",
+    "Category": "Public Listing",
+    "FieldName": "PublicListingServiceUrl",
+    "ParamFieldName": "publicListing.publicListingServiceUrl",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": "https://list.s1servers.com"
+  },
+  {
+    "DisplayName": "Public Listing ID",
+    "Description": "Directory identity issued at https://s1servers.com/server-portal. Changes apply on the next server start.",
+    "Category": "Public Listing",
+    "FieldName": "PublicListingId",
+    "ParamFieldName": "publicListing.publicListingId",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": ""
+  },
+  {
+    "DisplayName": "Public Listing Secret",
+    "Description": "Directory secret issued by the server portal. Keep this credential private. Changes apply on the next server start.",
+    "Category": "Public Listing",
+    "FieldName": "PublicListingSecret",
+    "ParamFieldName": "publicListing.publicListingSecret",
+    "IncludeInCommandLine": false,
+    "InputType": "password",
+    "DefaultValue": ""
   },
   {
     "DisplayName": "Authentication Provider",
-    "Description": "SteamGameServer is recommended for public servers.",
+    "Description": "Authentication provider: 'SteamGameServer' for normal hosting, or 'None' for local development. Legacy 'SteamWebApi' values are migrated to 'SteamGameServer'. Changes apply on the next server start.",
     "Category": "Security",
     "FieldName": "AuthProvider",
+    "ParamFieldName": "authentication.authProvider",
+    "IncludeInCommandLine": false,
     "InputType": "enum",
-    "EnumValues": {
-      "SteamGameServer": "Steam Game Server"
-    },
     "DefaultValue": "SteamGameServer",
-    "Required": true,
-    "IncludeInCommandLine": false
+    "EnumValues": {
+      "SteamGameServer": "Steam Game Server",
+      "None": "None (local development)"
+    }
+  },
+  {
+    "DisplayName": "Auth Timeout Seconds",
+    "Description": "Authentication handshake timeout in seconds. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "AuthTimeoutSeconds",
+    "ParamFieldName": "authentication.authTimeoutSeconds",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "DefaultValue": "30"
+  },
+  {
+    "DisplayName": "Mod Verification Enabled",
+    "Description": "Require the dedicated client mod verification handshake. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "ModVerificationEnabled",
+    "ParamFieldName": "authentication.modVerificationEnabled",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "true",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Mod Verification Timeout Seconds",
+    "Description": "Client mod verification timeout in seconds. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "ModVerificationTimeoutSeconds",
+    "ParamFieldName": "authentication.modVerificationTimeoutSeconds",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "DefaultValue": "20"
   },
   {
     "DisplayName": "Block Known Risky Client Mods",
-    "Description": "Reject players using client mods the S1DS project flags as risky.",
+    "Description": "Reject known risky client-only mods even when unpaired mods are allowed. Changes apply on the next server start.",
     "Category": "Security",
     "FieldName": "BlockRiskyClientMods",
-    "InputType": "enum",
-    "EnumValues": {
-      "true": "Yes",
-      "false": "No"
-    },
+    "ParamFieldName": "authentication.blockKnownRiskyClientMods",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
     "DefaultValue": "true",
-    "IncludeInCommandLine": false
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Allow Unpaired Client Mods",
+    "Description": "Allow client-only mods that do not have a paired server mod. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "AllowUnpairedClientMods",
+    "ParamFieldName": "authentication.allowUnpairedClientMods",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "true",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Strict Client Mod Mode",
+    "Description": "Require strict hash pinning for approved client mods. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "StrictClientModMode",
+    "ParamFieldName": "authentication.strictClientModMode",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "false",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Steam Game Server Log On Anonymous",
+    "Description": "Use anonymous Steam game server login. Disable to use a server token. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "SteamGameServerLogOnAnonymous",
+    "ParamFieldName": "authentication.steamGameServerLogOnAnonymous",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "true",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Steam Game Server Token",
+    "Description": "Steam game server login token used when anonymous login is disabled. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "SteamGameServerToken",
+    "ParamFieldName": "authentication.steamGameServerToken",
+    "IncludeInCommandLine": false,
+    "InputType": "password",
+    "DefaultValue": ""
+  },
+  {
+    "DisplayName": "Steam Game Server Query Port",
+    "Description": "Steam query/status port. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "$QueryPort",
+    "ParamFieldName": "authentication.steamGameServerQueryPort",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "Hidden": true,
+    "ExcludeFromImport": true
+  },
+  {
+    "DisplayName": "Steam Game Server Mode",
+    "Description": "Steam game server mode: 'NoAuthentication', 'Authentication', or 'AuthenticationAndSecure'. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "SteamGameServerMode",
+    "ParamFieldName": "authentication.steamGameServerMode",
+    "IncludeInCommandLine": false,
+    "InputType": "enum",
+    "DefaultValue": "Authentication",
+    "EnumValues": {
+      "NoAuthentication": "NoAuthentication",
+      "Authentication": "Authentication",
+      "AuthenticationAndSecure": "AuthenticationAndSecure"
+    }
+  },
+  {
+    "DisplayName": "Steam Web API Key",
+    "Description": "Deprecated compatibility setting. SteamWebApi auth is no longer selectable. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "SteamWebApiKey",
+    "ParamFieldName": "authentication.steamWebApiKey",
+    "IncludeInCommandLine": false,
+    "InputType": "password",
+    "DefaultValue": "",
+    "Hidden": true
+  },
+  {
+    "DisplayName": "Steam Web API Identity",
+    "Description": "Deprecated compatibility setting. SteamWebApi auth is no longer selectable. Changes apply on the next server start.",
+    "Category": "Security",
+    "FieldName": "SteamWebApiIdentity",
+    "ParamFieldName": "authentication.steamWebApiIdentity",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": "DedicatedServerMod",
+    "Hidden": true
+  },
+  {
+    "DisplayName": "Messaging Backend",
+    "Description": "Messaging backend: 'FishNetRpc' or 'SteamNetworkingSockets'. FishNetRpc is the default on both Mono and IL2CPP. Changes apply on the next server start.",
+    "Category": "Networking",
+    "FieldName": "MessagingBackend",
+    "ParamFieldName": "messaging.messagingBackend",
+    "IncludeInCommandLine": false,
+    "InputType": "enum",
+    "DefaultValue": "FishNetRpc",
+    "EnumValues": {
+      "FishNetRpc": "FishNet RPC",
+      "SteamNetworkingSockets": "Steam Networking Sockets"
+    }
+  },
+  {
+    "DisplayName": "Steam Networking Sockets Virtual Port",
+    "Description": "Steam Networking Sockets virtual port used for peer routing. Changes apply on the next server start.",
+    "Category": "Networking",
+    "FieldName": "SteamNetworkingSocketsVirtualPort",
+    "ParamFieldName": "messaging.steamNetworkingSocketsVirtualPort",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "DefaultValue": "0"
+  },
+  {
+    "DisplayName": "Steam Networking Sockets Max Payload Bytes",
+    "Description": "Maximum Steam Networking Sockets payload size in bytes. Changes apply on the next server start.",
+    "Category": "Networking",
+    "FieldName": "SteamNetworkingSocketsMaxPayloadBytes",
+    "ParamFieldName": "messaging.steamNetworkingSocketsMaxPayloadBytes",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "DefaultValue": "1200"
+  },
+  {
+    "DisplayName": "Steam Networking Sockets Server Steam ID",
+    "Description": "Optional target server SteamID for client-side Steam Networking Sockets routing. Changes apply on the next server start.",
+    "Category": "Networking",
+    "FieldName": "SteamNetworkingSocketsServerSteamId",
+    "ParamFieldName": "messaging.steamNetworkingSocketsServerSteamId",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": ""
+  },
+  {
+    "DisplayName": "TCP Console Enabled",
+    "Description": "Enable the TCP admin console. Changes apply on the next server start.",
+    "Category": "Host Console",
+    "FieldName": "TcpConsoleEnabled",
+    "ParamFieldName": "tcpConsole.tcpConsoleEnabled",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "false",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "TCP Console Bind Address",
+    "Description": "Bind address for the TCP console. Use '127.0.0.1' for local-only access. Changes apply on the next server start.",
+    "Category": "Host Console",
+    "FieldName": "TcpConsoleBindAddress",
+    "ParamFieldName": "tcpConsole.tcpConsoleBindAddress",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": "127.0.0.1"
+  },
+  {
+    "DisplayName": "TCP Console Port",
+    "Description": "TCP console port. Changes apply on the next server start.",
+    "Category": "Host Console",
+    "FieldName": "$ConsolePort",
+    "ParamFieldName": "tcpConsole.tcpConsolePort",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "Hidden": true,
+    "ExcludeFromImport": true
+  },
+  {
+    "DisplayName": "TCP Console Max Connections",
+    "Description": "Maximum concurrent TCP console clients. Changes apply on the next server start.",
+    "Category": "Host Console",
+    "FieldName": "TcpConsoleMaxConnections",
+    "ParamFieldName": "tcpConsole.tcpConsoleMaxConnections",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "DefaultValue": "3"
+  },
+  {
+    "DisplayName": "TCP Console Require Password",
+    "Description": "Require a password for the TCP console. Changes apply on the next server start.",
+    "Category": "Host Console",
+    "FieldName": "TcpConsoleRequirePassword",
+    "ParamFieldName": "tcpConsole.tcpConsoleRequirePassword",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "false",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "TCP Console Password",
+    "Description": "TCP console password. Changes apply on the next server start.",
+    "Category": "Host Console",
+    "FieldName": "TcpConsolePassword",
+    "ParamFieldName": "tcpConsole.tcpConsolePassword",
+    "IncludeInCommandLine": false,
+    "InputType": "password",
+    "DefaultValue": ""
+  },
+  {
+    "DisplayName": "Host Console Mode",
+    "Description": "Host stdio console mode: 'Disabled', 'Auto', or 'Enabled'. Changes apply on the next server start.",
+    "Category": "Host Console",
+    "FieldName": "StdioConsoleMode",
+    "ParamFieldName": "tcpConsole.stdioConsoleMode",
+    "IncludeInCommandLine": false,
+    "InputType": "enum",
+    "DefaultValue": "Enabled",
+    "EnumValues": {
+      "Enabled": "Enabled (required by AMP)"
+    },
+    "Hidden": true
+  },
+  {
+    "DisplayName": "Web Panel Enabled",
+    "Description": "Enable the integrated loopback-only web panel. Disabled by default for hosted or service-style deployments. Changes apply on the next server start.",
+    "Category": "Web Panel",
+    "FieldName": "WebPanelEnabled",
+    "ParamFieldName": "webPanel.webPanelEnabled",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "false",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Web Panel Bind Address",
+    "Description": "Loopback bind address for the web panel. Only localhost/127.0.0.1-style addresses are supported. Changes apply on the next server start.",
+    "Category": "Web Panel",
+    "FieldName": "WebPanelBindAddress",
+    "ParamFieldName": "webPanel.webPanelBindAddress",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": "127.0.0.1"
+  },
+  {
+    "DisplayName": "Web Panel Port",
+    "Description": "HTTP port for the integrated web panel. Changes apply on the next server start.",
+    "Category": "Web Panel",
+    "FieldName": "$WebPanelPort",
+    "ParamFieldName": "webPanel.webPanelPort",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "Hidden": true,
+    "ExcludeFromImport": true
+  },
+  {
+    "DisplayName": "Web Panel Open Browser On Start",
+    "Description": "Attempt to open the web panel in the default browser on startup. Changes apply on the next server start.",
+    "Category": "Web Panel",
+    "FieldName": "WebPanelOpenBrowserOnStart",
+    "ParamFieldName": "webPanel.webPanelOpenBrowserOnStart",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "false",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Web Panel Session Minutes",
+    "Description": "Session lifetime in minutes for localhost browser access. Changes apply on the next server start.",
+    "Category": "Web Panel",
+    "FieldName": "WebPanelSessionMinutes",
+    "ParamFieldName": "webPanel.webPanelSessionMinutes",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "DefaultValue": "120"
+  },
+  {
+    "DisplayName": "Web Panel Expose Logs",
+    "Description": "Expose recent runtime logs to the localhost web panel. Changes apply on the next server start.",
+    "Category": "Web Panel",
+    "FieldName": "WebPanelExposeLogs",
+    "ParamFieldName": "webPanel.webPanelExposeLogs",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "true",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Ignore Ghost Host For Sleep",
+    "Description": "Ignore the loopback ghost host when checking sleep readiness. Changes apply on the next server start.",
+    "Category": "Gameplay",
+    "FieldName": "IgnoreGhostHostForSleep",
+    "ParamFieldName": "gameplay.ignoreGhostHostForSleep",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "true",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Time Progression Multiplier",
+    "Description": "Time progression multiplier. 1.0 is the default game speed. Changes apply on the next server start. Decimal values use a point, for example 1.5.",
+    "Category": "Gameplay",
+    "FieldName": "TimeProgressionMultiplier",
+    "ParamFieldName": "gameplay.timeProgressionMultiplier",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": "1.0"
+  },
+  {
+    "DisplayName": "Allow Sleeping",
+    "Description": "Allow players to sleep to advance time. Changes apply on the next server start.",
+    "Category": "Gameplay",
+    "FieldName": "AllowSleeping",
+    "ParamFieldName": "gameplay.allowSleeping",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "true",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Pause Game When Empty",
+    "Description": "Pause the game simulation when no players are connected. Changes apply on the next server start.",
+    "Category": "Gameplay",
+    "FieldName": "PauseGameWhenEmpty",
+    "ParamFieldName": "gameplay.pauseGameWhenEmpty",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "false",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Fresh Save Quest Bootstrap Mode",
+    "Description": "Fresh-save quest bootstrap mode: 'StartFromBeginning' (recommended) or 'StartPostIntro'. Changes apply on the next server start.",
+    "Category": "Gameplay",
+    "FieldName": "FreshSaveQuestBootstrapMode",
+    "ParamFieldName": "gameplay.freshSaveQuestBootstrapMode",
+    "IncludeInCommandLine": false,
+    "InputType": "enum",
+    "DefaultValue": "StartFromBeginning",
+    "EnumValues": {
+      "StartFromBeginning": "Start From Beginning",
+      "StartPostIntro": "Start After Intro"
+    }
+  },
+  {
+    "DisplayName": "Auto Save Enabled",
+    "Description": "Enable timed auto-saving. Changes apply on the next server start.",
+    "Category": "Autosave",
+    "FieldName": "AutoSaveEnabled",
+    "ParamFieldName": "autosave.autoSaveEnabled",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "true",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Auto Save Interval Minutes",
+    "Description": "Minutes between automatic saves. Changes apply on the next server start. Decimal values use a point, for example 1.5.",
+    "Category": "Autosave",
+    "FieldName": "AutoSaveIntervalMinutes",
+    "ParamFieldName": "autosave.autoSaveIntervalMinutes",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": "15.0"
+  },
+  {
+    "DisplayName": "Auto Save On Player Join",
+    "Description": "Trigger a save when a player joins. Changes apply on the next server start.",
+    "Category": "Autosave",
+    "FieldName": "AutoSaveOnPlayerJoin",
+    "ParamFieldName": "autosave.autoSaveOnPlayerJoin",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "true",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Auto Save On Player Leave",
+    "Description": "Trigger a save when a player leaves. Changes apply on the next server start.",
+    "Category": "Autosave",
+    "FieldName": "AutoSaveOnPlayerLeave",
+    "ParamFieldName": "autosave.autoSaveOnPlayerLeave",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "true",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Enabled Logging Options",
+    "Description": "Comma-separated logging options; leave empty to disable all streams. Valid values: debugMode, verboseLogging, logPlayerActions, logAdminCommands, logNetworkingDebug, logMessageRoutingDebug, logMessagingBackendDebug, logStartupDebug, logServerNetworkDebug, logPlayerLifecycleDebug, logAuthenticationDebug. Changes apply on the next server start.",
+    "Category": "Logging",
+    "FieldName": "EnabledLoggingOptions",
+    "ParamFieldName": "logging.enabledLoggingOptions",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": "logPlayerActions, logAdminCommands"
+  },
+  {
+    "DisplayName": "Enable Performance Monitoring",
+    "Description": "Enable performance monitoring instrumentation. Changes apply on the next server start.",
+    "Category": "Logging",
+    "FieldName": "EnablePerformanceMonitoring",
+    "ParamFieldName": "logging.enablePerformanceMonitoring",
+    "IncludeInCommandLine": false,
+    "InputType": "checkbox",
+    "DefaultValue": "false",
+    "EnumValues": {
+      "True": "true",
+      "False": "false"
+    }
+  },
+  {
+    "DisplayName": "Target Frame Rate",
+    "Description": "Target frame rate. Use -1 for unlimited. Changes apply on the next server start.",
+    "Category": "Performance",
+    "FieldName": "TargetFrameRate",
+    "ParamFieldName": "performance.targetFrameRate",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "DefaultValue": "60",
+    "minValue": "-1",
+    "maxValue": "300"
+  },
+  {
+    "DisplayName": "VSync Count",
+    "Description": "VSync count. Dedicated servers should usually keep this at 0. Changes apply on the next server start.",
+    "Category": "Performance",
+    "FieldName": "VSyncCount",
+    "ParamFieldName": "performance.vSyncCount",
+    "IncludeInCommandLine": false,
+    "InputType": "number",
+    "DefaultValue": "0",
+    "minValue": "0",
+    "maxValue": "2"
+  },
+  {
+    "DisplayName": "Save Game Path",
+    "Description": "Optional custom save path. Empty uses UserData/DedicatedServerSave. Changes apply on the next server start. Enter a normal Windows path without adding quotes or doubling backslashes.",
+    "Category": "Storage",
+    "FieldName": "SaveGamePath",
+    "ParamFieldName": "storage.saveGamePath",
+    "IncludeInCommandLine": false,
+    "InputType": "text",
+    "DefaultValue": ""
   },
   {
     "DisplayName": "Additional Arguments",
-    "Description": "Extra command-line arguments appended to the launch command.",
+    "Description": "Extra launch arguments. These override the matching settings in server_config.toml.",
     "Category": "Advanced",
     "FieldName": "CustomArgs",
     "InputType": "text",

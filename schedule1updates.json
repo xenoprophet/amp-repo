@@ -36,5 +36,53 @@
     "UpdateSourceData": "powershell.exe",
     "UpdateSourceArgs": "-NoProfile -Command \"Set-Content -Path '{{$FullBaseDir}}steam_appid.txt' -Value '3164500' -NoNewline\"",
     "SkipOnFailure": true
+  },
+  {
+    "UpdateStageName": "Create configuration directory",
+    "UpdateSourcePlatform": "Windows",
+    "UpdateSource": "Executable",
+    "UpdateSourceData": "powershell.exe",
+    "UpdateSourceArgs": "-NoProfile -NonInteractive -Command \"[IO.Directory]::CreateDirectory('{{$FullBaseDir}}UserData') | Out-Null\"",
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Download AMP_server_settings.default.json",
+    "UpdateSourcePlatform": "Windows",
+    "UpdateSource": "FetchURL",
+    "UpdateSourceData": "https://raw.githubusercontent.com/xenoprophet/amp-repo/main/schedule1settings.json",
+    "UpdateSourceTarget": "{{$FullBaseDir}}",
+    "UpdateSourceArgs": "AMP_server_settings.default.json",
+    "OverwriteExistingFiles": true,
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Download AMP_server_settings.json",
+    "UpdateSourcePlatform": "Windows",
+    "UpdateSource": "FetchURL",
+    "UpdateSourceData": "https://raw.githubusercontent.com/xenoprophet/amp-repo/main/schedule1settings.json",
+    "UpdateSourceTarget": "{{$FullBaseDir}}",
+    "UpdateSourceArgs": "AMP_server_settings.json",
+    "OverwriteExistingFiles": false,
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Download AMP_server_config.default.toml",
+    "UpdateSourcePlatform": "Windows",
+    "UpdateSource": "FetchURL",
+    "UpdateSourceData": "https://raw.githubusercontent.com/xenoprophet/amp-repo/main/schedule1server_config.toml",
+    "UpdateSourceTarget": "{{$FullBaseDir}}",
+    "UpdateSourceArgs": "AMP_server_config.default.toml",
+    "OverwriteExistingFiles": true,
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Download AMP_WriteServerConfig.ps1",
+    "UpdateSourcePlatform": "Windows",
+    "UpdateSource": "FetchURL",
+    "UpdateSourceData": "https://raw.githubusercontent.com/xenoprophet/amp-repo/main/schedule1writeconfig.ps1",
+    "UpdateSourceTarget": "{{$FullBaseDir}}",
+    "UpdateSourceArgs": "AMP_WriteServerConfig.ps1",
+    "OverwriteExistingFiles": true,
+    "SkipOnFailure": false
   }
 ]
